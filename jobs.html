@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>职位信息库 | 研职图谱</title>
+    <link rel="stylesheet" href="./assets/styles.css" />
+  </head>
+  <body>
+    <div class="background-glow"></div>
+    <header class="site-header">
+      <a class="brand" href="./index.html">
+        <span class="brand-badge">研</span>
+        <span>研职图谱</span>
+      </a>
+      <nav class="site-nav">
+        <a href="./index.html">首页</a>
+        <a href="./channels.html">高频渠道雷达</a>
+        <a href="#job-form">发布职位</a>
+      </nav>
+    </header>
+
+    <main class="jobs-main">
+      <section class="panel" aria-labelledby="form-title">
+        <h1 id="form-title">发布 / 编辑职位</h1>
+        <p class="panel-copy">参考 APICompare 的“列表 + 录入”模式，字段按研究生求职场景定制。</p>
+
+        <form id="job-form" class="job-form">
+          <input type="hidden" id="job-id" />
+
+          <label>
+            岗位名称
+            <input id="title" type="text" required placeholder="例如：医学检验技术员（科研岗）" />
+          </label>
+
+          <label>
+            学科方向
+            <select id="discipline" required>
+              <option value="">请选择方向</option>
+              <option value="临床检验诊断学">临床检验诊断学</option>
+              <option value="药学">药学</option>
+              <option value="生物学">生物学</option>
+            </select>
+          </label>
+
+          <label>
+            学历要求
+            <select id="degree" required>
+              <option value="">请选择学历</option>
+              <option value="本科">本科</option>
+              <option value="硕士">硕士</option>
+              <option value="本硕不限">本硕不限</option>
+            </select>
+          </label>
+
+          <label>
+            单位名称
+            <input id="organization" type="text" required placeholder="例如：某三甲医院检验科" />
+          </label>
+
+          <label>
+            工作城市
+            <input id="city" type="text" required placeholder="例如：上海" />
+          </label>
+
+          <label>
+            薪资范围
+            <input id="salary" type="text" placeholder="例如：15k-25k/月" />
+          </label>
+
+          <label>
+            截止日期
+            <input id="deadline" type="date" />
+          </label>
+
+          <label>
+            渠道来源
+            <select id="source-channel">
+              <option value="">请选择渠道</option>
+              <option value="丁香人才网">丁香人才网</option>
+              <option value="高校人才网">高校人才网</option>
+              <option value="医药英才网">医药英才网</option>
+              <option value="BOSS直聘">BOSS直聘</option>
+              <option value="微信公众号">微信公众号</option>
+              <option value="卫健委公众号">卫健委公众号</option>
+              <option value="24365就业平台">24365就业平台</option>
+              <option value="医药之梯">医药之梯</option>
+              <option value="医学教育网">医学教育网</option>
+              <option value="中公/华图医疗卫生">中公/华图医疗卫生</option>
+              <option value="其他">其他</option>
+            </select>
+          </label>
+
+          <label>
+            信息来源链接
+            <input id="source" type="url" placeholder="https://" />
+          </label>
+
+          <label>
+            备注
+            <textarea id="notes" rows="3" placeholder="例如：需有细胞实验经验"></textarea>
+          </label>
+
+          <div class="form-actions">
+            <button type="submit" class="btn btn-primary">保存职位</button>
+            <button type="button" class="btn btn-tertiary" id="reset-btn">清空</button>
+          </div>
+        </form>
+      </section>
+
+      <section class="panel" aria-labelledby="list-title">
+        <div class="list-head">
+          <h2 id="list-title">职位信息库</h2>
+          <span id="list-count" class="count-pill">0 条</span>
+        </div>
+        <div class="sync-bar">
+          <button id="sync-jobs-btn" class="btn btn-secondary" type="button">同步最新岗位</button>
+          <span id="sync-status" class="sync-status">尚未同步自动采集数据</span>
+        </div>
+
+        <div class="filters">
+          <label>
+            关键词
+            <input id="filter-keyword" type="text" placeholder="岗位名/单位/备注" />
+          </label>
+
+          <label>
+            方向筛选
+            <select id="filter-discipline">
+              <option value="全部">全部</option>
+              <option value="临床检验诊断学">临床检验诊断学</option>
+              <option value="药学">药学</option>
+              <option value="生物学">生物学</option>
+            </select>
+          </label>
+
+          <label>
+            渠道筛选
+            <select id="filter-channel">
+              <option value="全部">全部渠道</option>
+              <option value="丁香人才网">丁香人才网</option>
+              <option value="高校人才网">高校人才网</option>
+              <option value="医药英才网">医药英才网</option>
+              <option value="BOSS直聘">BOSS直聘</option>
+              <option value="微信公众号">微信公众号</option>
+              <option value="卫健委公众号">卫健委公众号</option>
+              <option value="24365就业平台">24365就业平台</option>
+              <option value="医药之梯">医药之梯</option>
+              <option value="医学教育网">医学教育网</option>
+              <option value="中公/华图医疗卫生">中公/华图医疗卫生</option>
+              <option value="其他">其他</option>
+            </select>
+          </label>
+
+          <label>
+            城市筛选
+            <input id="filter-city" type="text" placeholder="例如：广州" />
+          </label>
+        </div>
+
+        <div id="job-list" class="job-list"></div>
+      </section>
+    </main>
+
+    <script src="./assets/app.js"></script>
+  </body>
+</html>

@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>研职图谱 | 临床检验诊断学・药学・生物学求职信息站</title>
+    <link rel="stylesheet" href="./assets/styles.css" />
+  </head>
+  <body>
+    <div class="background-glow"></div>
+    <header class="site-header">
+      <a class="brand" href="./index.html">
+        <span class="brand-badge">研</span>
+        <span>研职图谱</span>
+      </a>
+      <nav class="site-nav">
+        <a href="./jobs.html">职位信息库</a>
+        <a href="./channels.html">高频渠道雷达</a>
+        <a href="./jobs.html#job-form">发布职位</a>
+      </nav>
+    </header>
+
+    <main class="home-main">
+      <section class="hero">
+        <p class="tag">Graduate Career Hub</p>
+        <h1>面向临床检验诊断学、药学、生物学研究生的求职信息网站</h1>
+        <p class="hero-copy">
+          参考 APICompare 的简洁信息流结构，聚焦科研院校、医院检验科、药企研发与生物技术岗位，支持快速发布、筛选与跟踪。
+        </p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="./jobs.html">查看职位</a>
+          <a class="btn btn-tertiary" href="./channels.html">查看刷岗渠道</a>
+          <a class="btn btn-secondary" href="./jobs.html#job-form">发布新职位</a>
+        </div>
+      </section>
+
+      <section class="stats-grid" aria-label="岗位概览">
+        <article class="stat-card">
+          <h2 id="total-count">0</h2>
+          <p>岗位总数</p>
+        </article>
+        <article class="stat-card">
+          <h2 id="lab-count">0</h2>
+          <p>临床检验诊断学</p>
+        </article>
+        <article class="stat-card">
+          <h2 id="pharma-count">0</h2>
+          <p>药学</p>
+        </article>
+        <article class="stat-card">
+          <h2 id="bio-count">0</h2>
+          <p>生物学</p>
+        </article>
+      </section>
+
+      <section class="timeline-panel">
+        <h3>今日刷岗优先级</h3>
+        <div class="mini-channels">
+          <div><strong>第一梯队：</strong>丁香人才网 / 高校人才网 / 医药英才网</div>
+          <div><strong>实时补充：</strong>BOSS直聘 + 微信公众号岗位推送</div>
+          <div><strong>编制渠道：</strong>卫健委公众号 + 24365 + 医学教育网</div>
+        </div>
+      </section>
+
+      <section class="timeline-panel">
+        <h3>如何使用</h3>
+        <ol>
+          <li>进入职位信息库，按方向/城市/关键词筛选。</li>
+          <li>点击“编辑”补充薪资、截止日期、渠道来源、来源链接等字段。</li>
+          <li>定期更新信息，构建你自己的就业情报面板。</li>
+        </ol>
+      </section>
+    </main>
+
+    <script>
+      (function () {
+        const key = "clinical-job-hub-data-v1";
+        const seed = [
+          { discipline: "临床检验诊断学" },
+          { discipline: "药学" },
+          { discipline: "生物学" }
+        ];
+        const jobs = JSON.parse(localStorage.getItem(key) || "null") || seed;
+        const total = jobs.length;
+        const lab = jobs.filter((j) => j.discipline === "临床检验诊断学").length;
+        const pharma = jobs.filter((j) => j.discipline === "药学").length;
+        const bio = jobs.filter((j) => j.discipline === "生物学").length;
+        document.getElementById("total-count").textContent = total;
+        document.getElementById("lab-count").textContent = lab;
+        document.getElementById("pharma-count").textContent = pharma;
+        document.getElementById("bio-count").textContent = bio;
+      })();
+    </script>
+  </body>
+</html>

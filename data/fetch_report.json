@@ -1,0 +1,62 @@
+{
+  "started_at": "2026-03-04T15:11:10",
+  "finished_at": "2026-03-04T15:11:40",
+  "sources": 10,
+  "scanned": 0,
+  "accepted": 0,
+  "inserted": 0,
+  "updated": 0,
+  "errors": [
+    {
+      "source": "dxy_jobmd",
+      "url": "https://www.jobmd.cn/work/",
+      "error": "fetch failed: https://www.jobmd.cn/work/, error=HTTPSConnectionPool(host='www.jobmd.cn', port=443): Max retries exceeded with url: /work/ (Caused by NameResolutionError(\"<urllib3.connection.HTTPSConnection object at 0x10c066090>: Failed to resolve 'www.jobmd.cn' ([Errno 8] nodename nor servname provided, or not known)\"))"
+    },
+    {
+      "source": "gaoxiao_job",
+      "url": "https://www.gaoxiaojob.com/",
+      "error": "fetch failed: https://www.gaoxiaojob.com/, error=HTTPSConnectionPool(host='www.gaoxiaojob.com', port=443): Max retries exceeded with url: / (Caused by NameResolutionError(\"<urllib3.connection.HTTPSConnection object at 0x10c066a80>: Failed to resolve 'www.gaoxiaojob.com' ([Errno 8] nodename nor servname provided, or not known)\"))"
+    },
+    {
+      "source": "healthr",
+      "url": "https://www.healthr.com/",
+      "error": "fetch failed: https://www.healthr.com/, error=HTTPSConnectionPool(host='www.healthr.com', port=443): Max retries exceeded with url: / (Caused by NameResolutionError(\"<urllib3.connection.HTTPSConnection object at 0x10c067980>: Failed to resolve 'www.healthr.com' ([Errno 8] nodename nor servname provided, or not known)\"))"
+    },
+    {
+      "source": "boss_zhipin",
+      "url": "https://www.zhipin.com/",
+      "error": "fetch failed: https://www.zhipin.com/, error=HTTPSConnectionPool(host='www.zhipin.com', port=443): Max retries exceeded with url: / (Caused by NameResolutionError(\"<urllib3.connection.HTTPSConnection object at 0x10c066ed0>: Failed to resolve 'www.zhipin.com' ([Errno 8] nodename nor servname provided, or not known)\"))"
+    },
+    {
+      "source": "platform_24365",
+      "url": "https://24365.smartedu.cn/",
+      "error": "fetch failed: https://24365.smartedu.cn/, error=HTTPSConnectionPool(host='24365.smartedu.cn', port=443): Max retries exceeded with url: / (Caused by NameResolutionError(\"<urllib3.connection.HTTPSConnection object at 0x10c067ce0>: Failed to resolve '24365.smartedu.cn' ([Errno 8] nodename nor servname provided, or not known)\"))"
+    },
+    {
+      "source": "bj_rsj",
+      "url": "https://rsj.beijing.gov.cn/xxgk/gkzp/",
+      "error": "fetch failed: https://rsj.beijing.gov.cn/xxgk/gkzp/, error=HTTPSConnectionPool(host='rsj.beijing.gov.cn', port=443): Max retries exceeded with url: /xxgk/gkzp/ (Caused by NameResolutionError(\"<urllib3.connection.HTTPSConnection object at 0x10c0a8b30>: Failed to resolve 'rsj.beijing.gov.cn' ([Errno 8] nodename nor servname provided, or not known)\"))"
+    },
+    {
+      "source": "sh_rsj",
+      "url": "https://rsj.sh.gov.cn/tzpgg_17408/",
+      "error": "fetch failed: https://rsj.sh.gov.cn/tzpgg_17408/, error=HTTPSConnectionPool(host='rsj.sh.gov.cn', port=443): Max retries exceeded with url: /tzpgg_17408/ (Caused by NameResolutionError(\"<urllib3.connection.HTTPSConnection object at 0x10c0659d0>: Failed to resolve 'rsj.sh.gov.cn' ([Errno 8] nodename nor servname provided, or not known)\"))"
+    },
+    {
+      "source": "china_cdc",
+      "url": "https://www.chinacdc.cn/",
+      "error": "fetch failed: https://www.chinacdc.cn/, error=HTTPSConnectionPool(host='www.chinacdc.cn', port=443): Max retries exceeded with url: / (Caused by NameResolutionError(\"<urllib3.connection.HTTPSConnection object at 0x10c067830>: Failed to resolve 'www.chinacdc.cn' ([Errno 8] nodename nor servname provided, or not known)\"))"
+    },
+    {
+      "source": "fujian_hc",
+      "url": "https://wjw.fujian.gov.cn/xxgk/rsxx/",
+      "error": "fetch failed: https://wjw.fujian.gov.cn/xxgk/rsxx/, error=HTTPSConnectionPool(host='wjw.fujian.gov.cn', port=443): Max retries exceeded with url: /xxgk/rsxx/ (Caused by NameResolutionError(\"<urllib3.connection.HTTPSConnection object at 0x10c0a9280>: Failed to resolve 'wjw.fujian.gov.cn' ([Errno 8] nodename nor servname provided, or not known)\"))"
+    },
+    {
+      "source": "medical_exam_portal",
+      "url": "https://www.med66.com/weishengdanweizhaopin/",
+      "error": "fetch failed: https://www.med66.com/weishengdanweizhaopin/, error=HTTPSConnectionPool(host='www.med66.com', port=443): Max retries exceeded with url: /weishengdanweizhaopin/ (Caused by NameResolutionError(\"<urllib3.connection.HTTPSConnection object at 0x10c0a9f10>: Failed to resolve 'www.med66.com' ([Errno 8] nodename nor servname provided, or not known)\"))"
+    }
+  ],
+  "dry_run": true
+}

@@ -1,0 +1,92 @@
+[
+  {
+    "id": "dxy_jobmd",
+    "name": "丁香人才网",
+    "category": "医院/医药企业",
+    "url": "https://www.jobmd.cn/work/",
+    "parser": "html",
+    "link_must_contain": ["jobmd.cn"],
+    "include_any": ["检验", "药学", "生物", "研发", "医院"]
+  },
+  {
+    "id": "gaoxiao_job",
+    "name": "高校人才网",
+    "category": "高校/科研院所",
+    "url": "https://www.gaoxiaojob.com/",
+    "parser": "html",
+    "link_must_contain": ["gaoxiaojob.com"],
+    "include_any": ["生物", "药学", "检验", "学院", "实验", "博士后"]
+  },
+  {
+    "id": "healthr",
+    "name": "医药英才网",
+    "category": "药企/研发",
+    "url": "https://www.healthr.com/",
+    "parser": "html",
+    "link_must_contain": ["healthr.com"],
+    "include_any": ["药", "生物", "研发", "临床", "质量"]
+  },
+  {
+    "id": "boss_zhipin",
+    "name": "BOSS直聘",
+    "category": "综合招聘",
+    "url": "https://www.zhipin.com/",
+    "parser": "html",
+    "link_must_contain": ["zhipin.com"],
+    "include_any": ["生物", "药", "检验", "医学", "实验"]
+  },
+  {
+    "id": "platform_24365",
+    "name": "国家大学生就业服务平台(24365)",
+    "category": "官方平台",
+    "url": "https://24365.smartedu.cn/",
+    "parser": "html",
+    "link_must_contain": ["24365.smartedu.cn"],
+    "include_any": ["药学", "生物", "医院", "检验", "教师", "高校"]
+  },
+  {
+    "id": "bj_rsj",
+    "name": "北京市人社局公开招聘",
+    "category": "事业编/医院/高校",
+    "url": "https://rsj.beijing.gov.cn/xxgk/gkzp/",
+    "parser": "html",
+    "link_must_contain": ["beijing.gov.cn"],
+    "include_any": ["医院", "卫生", "疾控", "血液", "高校", "职业学院", "检验", "药学"]
+  },
+  {
+    "id": "sh_rsj",
+    "name": "上海市人社局招聘公告",
+    "category": "事业编/医院/高校",
+    "url": "https://rsj.sh.gov.cn/tzpgg_17408/",
+    "parser": "html",
+    "link_must_contain": ["rsj.sh.gov.cn"],
+    "include_any": ["医院", "卫生", "高校", "疾控", "血站", "检验", "药学", "生物"]
+  },
+  {
+    "id": "china_cdc",
+    "name": "中国疾控中心官网",
+    "category": "疾控",
+    "url": "https://www.chinacdc.cn/",
+    "parser": "html",
+    "link_must_contain": ["chinacdc.cn"],
+    "include_any": ["招聘", "公开", "岗位", "人才", "实验", "检验", "生物"]
+  },
+  {
+    "id": "fujian_hc",
+    "name": "福建省卫健委人事信息",
+    "category": "卫健委/事业编",
+    "url": "https://wjw.fujian.gov.cn/xxgk/rsxx/",
+    "parser": "html",
+    "link_must_contain": ["fujian.gov.cn"],
+    "include_any": ["医院", "卫健", "事业", "疾控", "血站", "检验", "药学"]
+  },
+  {
+    "id": "medical_exam_portal",
+    "name": "医学教育网-医疗招聘考试",
+    "category": "考试资讯",
+    "url": "https://www.med66.com/weishengdanweizhaopin/",
+    "parser": "html",
+    "link_must_contain": ["med66.com"],
+    "include_any": ["医疗", "卫生", "招聘", "公告", "检验", "药学"]
+  }
+]
