@@ -1,6 +1,8 @@
 const STORAGE_KEY = "clinical-job-direct-v1";
 const FEED_URL = "./data/jobs_latest.json";
 const REPORT_URL = "./data/fetch_report.json";
+const WECHAT_FEED_URL = "./data/wechat_leads_latest.json";
+const WECHAT_REPORT_URL = "./data/wechat_fetch_report.json";
 
 const CITY_HINTS = [
   "北京", "上海", "广州", "深圳", "杭州", "宁波", "温州", "嘉兴", "湖州", "绍兴", "金华", "衢州", "舟山", "台州", "丽水",
@@ -12,6 +14,10 @@ const listEl = document.getElementById("job-list");
 const countEl = document.getElementById("list-count");
 const syncBtn = document.getElementById("sync-jobs-btn");
 const syncStatus = document.getElementById("sync-status");
+const wechatListEl = document.getElementById("wechat-list");
+const wechatCountEl = document.getElementById("wechat-count");
+const syncWechatBtn = document.getElementById("sync-wechat-btn");
+const wechatStatus = document.getElementById("wechat-status");
 
 const filterKeyword = document.getElementById("filter-keyword");
 const filterDiscipline = document.getElementById("filter-discipline");
@@ -96,6 +102,21 @@ function isDoctoralOnlyPosting(text) {
   return doctoral && !bachelorOrMaster;
 }
 
+function isWechatArticleLink(link) {
+  try {
+    const u = new URL(String(link || ""));
+    if (u.protocol !== "http:" && u.protocol !== "https:") return false;
+    if (u.hostname !== "mp.weixin.qq.com") return false;
+    const path = u.pathname.toLowerCase();
+    const query = u.search.toLowerCase();
+    const pathOk = path.startsWith("/s") || path.includes("appmsg");
+    const queryOk = query.includes("__biz=") || query.includes("mid=") || query.includes("sn=");
+    return pathOk && queryOk;
+  } catch {
+    return false;
+  }
+}
+
 function inferDiscipline(text, majorTags) {
   if (Array.isArray(majorTags)) {
     if (majorTags.includes("clinical_lab")) return "临床检验诊断学";
@@ -173,6 +194,10 @@ function escapeHtml(input) {
 
 function setSyncStatus(message) {
   if (syncStatus) syncStatus.textContent = message;
+}
+
+function setWechatStatus(message) {
+  if (wechatStatus) wechatStatus.textContent = message;
 }
 
 function normalizeImportedItem(raw) {
@@ -319,6 +344,99 @@ async function syncJobsFromFeed() {
   }
 }
 
+let wechatLeads = [];
+
+function normalizeWechatLead(raw) {
+  const title = normalizeText(raw.title);
+  const link = normalizeText(raw.link || raw.url);
+  const sourceName = normalizeText(raw.source_name || raw.source || "微信公众号");
+  const snippet = normalizeText(raw.snippet);
+  const publishDate = normalizeDate(raw.publish_date || raw.first_seen_at) || "待补充";
+
+  if (!title || !isWechatArticleLink(link)) return null;
+
+  return {
+    id: stableHash(`${title}|${link}`),
+    title,
+    link,
+    sourceName,
+    publishDate,
+    snippet
+  };
+}
+
+function renderWechatLeads() {
+  if (!wechatListEl || !wechatCountEl) return;
+
+  wechatCountEl.textContent = `${wechatLeads.length} 条`;
+  if (!wechatLeads.length) {
+    wechatListEl.innerHTML = '<div class="empty">暂无公众号线索。请先配置 `collector/wechat_sources.json` 并运行更新脚本。</div>';
+    return;
+  }
+
+  wechatListEl.innerHTML = wechatLeads
+    .map(
+      (lead) => `
+      <article class="job-card wechat-card">
+        <div class="job-title-row">
+          <h3 class="job-title">${escapeHtml(lead.title)}</h3>
+          <span class="badge">公众号</span>
+        </div>
+        <div class="meta-grid">
+          <div><span>来源：</span>${escapeHtml(lead.sourceName)}</div>
+          <div><span>发布日期：</span>${escapeHtml(lead.publishDate)}</div>
+        </div>
+        <div class="card-actions">
+          <a class="btn-mini" href="${escapeHtml(lead.link)}" target="_blank" rel="noreferrer">原文链接</a>
+        </div>
+      </article>`
+    )
+    .join("");
+}
+
+async function loadWechatCollectorReport() {
+  try {
+    const resp = await fetch(`${WECHAT_REPORT_URL}?t=${Date.now()}`, { cache: "no-store" });
+    if (!resp.ok) return;
+
+    const report = await resp.json();
+    const finished = normalizeDate(report.finished_at || "");
+    const enabled = Number(report.enabled_sources || 0);
+    const accepted = Number(report.accepted || 0);
+    if (!finished) return;
+    setWechatStatus(`最近采集：${finished}；启用源 ${enabled}，有效线索 ${accepted}`);
+  } catch {
+    // Ignore report errors.
+  }
+}
+
+async function syncWechatLeadsFromFeed() {
+  if (syncWechatBtn) syncWechatBtn.disabled = true;
+  setWechatStatus("正在刷新公众号线索...");
+
+  try {
+    const resp = await fetch(`${WECHAT_FEED_URL}?t=${Date.now()}`, { cache: "no-store" });
+    if (!resp.ok) {
+      throw new Error("未找到公众号线索数据，请先运行更新脚本");
+    }
+    const payload = await resp.json();
+    const items = Array.isArray(payload.items) ? payload.items : [];
+    wechatLeads = items
+      .map(normalizeWechatLead)
+      .filter(Boolean)
+      .sort((a, b) => String(b.publishDate).localeCompare(String(a.publishDate)));
+    renderWechatLeads();
+    setWechatStatus(`刷新完成：共 ${wechatLeads.length} 条原文线索`);
+  } catch (err) {
+    const msg = err instanceof Error ? err.message : "未知错误";
+    setWechatStatus(`刷新失败：${msg}`);
+    wechatLeads = [];
+    renderWechatLeads();
+  } finally {
+    if (syncWechatBtn) syncWechatBtn.disabled = false;
+  }
+}
+
 [filterKeyword, filterDiscipline, filterDegree].forEach((el) => {
   if (!el) return;
   el.addEventListener("input", renderList);
@@ -329,5 +447,12 @@ if (syncBtn) {
   syncBtn.addEventListener("click", syncJobsFromFeed);
 }
 
+if (syncWechatBtn) {
+  syncWechatBtn.addEventListener("click", syncWechatLeadsFromFeed);
+}
+
 renderList();
+renderWechatLeads();
 loadCollectorReport();
+loadWechatCollectorReport();
+syncWechatLeadsFromFeed();

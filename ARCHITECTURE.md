@@ -13,19 +13,21 @@ The system combines:
 ## 2. System Components
 
 ### 2.1 Frontend (Static Site)
-- Entry and dashboard: [index.html](/Users/jianglan/clinical-job-hub/index.html)
-- Job CRUD and filtering: [jobs.html](/Users/jianglan/clinical-job-hub/jobs.html)
-- Channel radar and strategy: [channels.html](/Users/jianglan/clinical-job-hub/channels.html)
-- Shared style: [styles.css](/Users/jianglan/clinical-job-hub/assets/styles.css)
-- Browser-side logic: [app.js](/Users/jianglan/clinical-job-hub/assets/app.js)
+- Entry and dashboard: [index.html](./index.html)
+- Job CRUD and filtering: [jobs.html](./jobs.html)
+- Channel radar and strategy: [channels.html](./channels.html)
+- Shared style: [styles.css](./assets/styles.css)
+- Browser-side logic: [app.js](./assets/app.js)
 
 Frontend storage:
 - `localStorage` key: `clinical-job-hub-data-v1`
 
 ### 2.2 Collector / ETL
-- Orchestration script: [fetch_daily_jobs.py](/Users/jianglan/clinical-job-hub/collector/fetch_daily_jobs.py)
-- Source definitions: [sources.json](/Users/jianglan/clinical-job-hub/collector/sources.json)
-- Domain keyword rules: [keywords.json](/Users/jianglan/clinical-job-hub/collector/keywords.json)
+- Orchestration script: [fetch_daily_jobs.py](./collector/fetch_daily_jobs.py)
+- Source definitions: [sources.json](./collector/sources.json)
+- Domain keyword rules: [keywords.json](./collector/keywords.json)
+- WeChat lead collector: [fetch_wechat_leads.py](./collector/fetch_wechat_leads.py)
+- WeChat source definitions: [wechat_sources.json](./collector/wechat_sources.json)
 
 ETL stages:
 1. Extract: fetch HTML/RSS from source URLs with retry.
@@ -33,12 +35,21 @@ ETL stages:
 3. Load: idempotent upsert into SQLite.
 4. Export: latest/today/report JSON for downstream use.
 
+WeChat lead pipeline (auxiliary):
+1. Extract: fetch configured RSS/HTML clue sources.
+2. Transform: keep only direct `mp.weixin.qq.com` article links.
+3. Filter: keep clinical lab/pathology/pharmacy/biology related signals, exclude doctoral-only signals.
+4. Load/Export: idempotent upsert to SQLite and output lead snapshots.
+
 ### 2.3 Data Layer
-- SQLite DB: [jobs.db](/Users/jianglan/clinical-job-hub/data/jobs.db) (generated at runtime)
+- SQLite DB: [jobs.db](./data/jobs.db) (generated at runtime)
 - Snapshot exports:
-  - [jobs_latest.json](/Users/jianglan/clinical-job-hub/data/jobs_latest.json)
-  - [jobs_today.json](/Users/jianglan/clinical-job-hub/data/jobs_today.json)
-  - [fetch_report.json](/Users/jianglan/clinical-job-hub/data/fetch_report.json)
+  - [jobs_latest.json](./data/jobs_latest.json)
+  - [jobs_today.json](./data/jobs_today.json)
+  - [fetch_report.json](./data/fetch_report.json)
+  - [wechat_leads_latest.json](./data/wechat_leads_latest.json)
+  - [wechat_leads_today.json](./data/wechat_leads_today.json)
+  - [wechat_fetch_report.json](./data/wechat_fetch_report.json)
 
 ## 3. Reliability Design
 - Idempotent key: `sha1(source_id|title|link)`.
@@ -46,6 +57,7 @@ ETL stages:
 - Incremental behavior: `first_seen_at` + `last_seen_at` tracking.
 - Duplicate safety: update existing records by deterministic ID.
 - Degree policy (current phase): keep bachelor/master-track postings, filter doctoral-only postings.
+- WeChat policy: keep only direct original article links; store metadata only (title/date/source/link).
 
 ## 4. Current Constraints
 - Some sources are dynamic/anti-bot pages; parser quality varies by site.
@@ -55,10 +67,11 @@ ETL stages:
 
 ## 5. Delivery and Operations
 - Repository: `biojiang25/clinical-job-hub` (branch: `main`).
-- Static deployment: GitHub Pages via [deploy-pages.yml](/Users/jianglan/clinical-job-hub/.github/workflows/deploy-pages.yml).
-- Daily data refresh: GitHub Actions cron via [collect-jobs.yml](/Users/jianglan/clinical-job-hub/.github/workflows/collect-jobs.yml).
-- Local/manual update entry: [update_jobs.sh](/Users/jianglan/clinical-job-hub/scripts/update_jobs.sh).
-- Frontend sync entry: “同步最新岗位” button in [jobs.html](/Users/jianglan/clinical-job-hub/jobs.html), powered by [app.js](/Users/jianglan/clinical-job-hub/assets/app.js).
+- Static deployment: GitHub Pages via [deploy-pages.yml](./.github/workflows/deploy-pages.yml).
+- Daily data refresh: GitHub Actions cron via [collect-jobs.yml](./.github/workflows/collect-jobs.yml).
+- Local/manual update entry: [update_jobs.sh](./scripts/update_jobs.sh).
+- Frontend sync entry: “同步最新岗位” button in [jobs.html](./jobs.html), powered by [app.js](./assets/app.js).
+- WeChat sync entry: “刷新公众号线索” button in [jobs.html](./jobs.html), powered by [app.js](./assets/app.js).
 
 ## 6. Next Architecture Step
 Implement province-level coverage control plane:

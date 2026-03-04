@@ -465,6 +465,23 @@ textarea:focus {
   background: #fff7e7;
 }
 
+.section-divider {
+  margin: 22px 0 18px;
+  border: 0;
+  border-top: 1px dashed #d8cfbb;
+}
+
+.wechat-panel {
+  display: grid;
+  gap: 8px;
+}
+
+.wechat-card .badge {
+  background: #eef6ff;
+  color: #2d4f8f;
+  border-color: #b6ccf8;
+}
+
 .channel-grid {
   margin-top: 12px;
   display: grid;

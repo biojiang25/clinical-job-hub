@@ -9,11 +9,12 @@
 - 轻量筛选：关键词、学科方向、学历（本科/硕士）
 - 自动更新：采集脚本输出 `data/jobs_latest.json`，前端一键同步
 - 渠道雷达：高频岗位渠道面板（医院、卫健委、事业编、疾控、血站、高校等）
+- 公众号线索：仅保留可直达 `mp.weixin.qq.com` 的原文链接（标题/日期/链接）
 
 ## 本地运行
 
 ```bash
-cd /Users/jianglan/clinical-job-hub
+cd <repo-root>
 python3 -m http.server 8080
 ```
 
@@ -24,12 +25,18 @@ python3 -m http.server 8080
 1. 执行采集：
 
 ```bash
-cd /Users/jianglan/clinical-job-hub
+cd <repo-root>
 bash scripts/update_jobs.sh
 ```
 
 2. 在网页 `jobs.html` 点击“同步最新岗位”。
-3. 页面会自动跳过无效链接（如站点首页、泛列表页、不可达链接）。
+3. 在同页点击“刷新公众号线索”查看微信补充线索。
+4. 页面会自动跳过无效链接（如站点首页、泛列表页、不可达链接）。
+
+### 配置公众号线索源
+
+编辑 `collector/wechat_sources.json`，将示例 `url` 替换为你可用的 RSS/HTML 源，并把对应 `enabled` 改为 `true`。  
+系统只保留可直达 `mp.weixin.qq.com` 的原文链接，不抓全文内容。
 
 ## GitHub 直接部署
 
@@ -60,7 +67,9 @@ clinical-job-hub/
     app.js
   collector/
     fetch_daily_jobs.py
+    fetch_wechat_leads.py
     sources.json
+    wechat_sources.json
     keywords.json
   scripts/
     update_jobs.sh
@@ -68,6 +77,9 @@ clinical-job-hub/
     jobs_latest.json
     jobs_today.json
     fetch_report.json
+    wechat_leads_latest.json
+    wechat_leads_today.json
+    wechat_fetch_report.json
   .github/workflows/
     collect-jobs.yml
     deploy-pages.yml

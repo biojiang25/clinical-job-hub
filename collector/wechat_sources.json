@@ -1,0 +1,29 @@
+[
+  {
+    "id": "wechat_medical_jobs_feed_1",
+    "name": "医药招聘公众号线索源 A（示例）",
+    "category": "微信公众号",
+    "enabled": false,
+    "url": "https://rsshub.app/wechat/mp/REPLACE_WITH_REAL_ACCOUNT_ID",
+    "parser": "rss",
+    "include_any": ["临床检验", "病理", "药学", "生物", "医院", "本科", "硕士"]
+  },
+  {
+    "id": "wechat_medical_jobs_feed_2",
+    "name": "医药招聘公众号线索源 B（示例）",
+    "category": "微信公众号",
+    "enabled": false,
+    "url": "https://rsshub.app/wechat/mp/REPLACE_WITH_REAL_ACCOUNT_ID",
+    "parser": "rss",
+    "include_any": ["临床检验", "病理", "药学", "生物", "卫健委", "事业单位", "硕士"]
+  },
+  {
+    "id": "wechat_medical_jobs_feed_3",
+    "name": "卫健委公众号线索源（示例）",
+    "category": "微信公众号",
+    "enabled": false,
+    "url": "https://rsshub.app/wechat/mp/REPLACE_WITH_REAL_ACCOUNT_ID",
+    "parser": "rss",
+    "include_any": ["医院", "疾控", "血站", "药学", "检验", "本科", "硕士"]
+  }
+]
