@@ -1,15 +1,41 @@
 {
-  "started_at": "",
-  "finished_at": "",
-  "sources": 0,
-  "enabled_sources": 0,
+  "started_at": "2026-03-04T09:42:18",
+  "finished_at": "2026-03-04T09:42:31",
+  "sources": 5,
+  "enabled_sources": 5,
   "scanned": 0,
   "accepted": 0,
   "skipped_non_wechat": 0,
   "rejected_unreachable": 0,
   "inserted": 0,
   "updated": 0,
-  "errors": [],
+  "errors": [
+    {
+      "source": "wechat_yxjyzp",
+      "url": "https://rsshub.app/wechat/uread/yxjyzp",
+      "error": "fetch failed: https://rsshub.app/wechat/uread/yxjyzp, error=403 Client Error: Forbidden for url: https://rsshub.app/wechat/uread/yxjyzp"
+    },
+    {
+      "source": "wechat_gdyyzp",
+      "url": "https://rsshub.app/wechat/uread/gdyyzp",
+      "error": "fetch failed: https://rsshub.app/wechat/uread/gdyyzp, error=403 Client Error: Forbidden for url: https://rsshub.app/wechat/uread/gdyyzp"
+    },
+    {
+      "source": "wechat_qq3423498",
+      "url": "https://rsshub.app/wechat/uread/qq3423498",
+      "error": "fetch failed: https://rsshub.app/wechat/uread/qq3423498, error=403 Client Error: Forbidden for url: https://rsshub.app/wechat/uread/qq3423498"
+    },
+    {
+      "source": "wechat_yhzhp123",
+      "url": "https://rsshub.app/wechat/uread/yhzhp123",
+      "error": "fetch failed: https://rsshub.app/wechat/uread/yhzhp123, error=403 Client Error: Forbidden for url: https://rsshub.app/wechat/uread/yhzhp123"
+    },
+    {
+      "source": "wechat_yxrcjob",
+      "url": "https://rsshub.app/wechat/uread/yxrcjob",
+      "error": "fetch failed: https://rsshub.app/wechat/uread/yxrcjob, error=403 Client Error: Forbidden for url: https://rsshub.app/wechat/uread/yxrcjob"
+    }
+  ],
   "dry_run": false,
   "enable_link_verify": false
 }
