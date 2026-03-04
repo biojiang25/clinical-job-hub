@@ -45,13 +45,22 @@ ETL stages:
 - Retry: network fetch retries with backoff sleep.
 - Incremental behavior: `first_seen_at` + `last_seen_at` tracking.
 - Duplicate safety: update existing records by deterministic ID.
+- Degree policy (current phase): keep bachelor/master-track postings, filter doctoral-only postings.
 
 ## 4. Current Constraints
 - Some sources are dynamic/anti-bot pages; parser quality varies by site.
 - Coverage completeness requires province/city source matrix maintenance.
 - Absolute "no missing posting" is not guaranteed; can be improved through auditing.
+- Local execution may fail under restricted DNS/proxy; scheduled GitHub Actions is the primary runtime for online updates.
 
-## 5. Next Architecture Step
+## 5. Delivery and Operations
+- Repository: `biojiang25/clinical-job-hub` (branch: `main`).
+- Static deployment: GitHub Pages via [deploy-pages.yml](/Users/jianglan/clinical-job-hub/.github/workflows/deploy-pages.yml).
+- Daily data refresh: GitHub Actions cron via [collect-jobs.yml](/Users/jianglan/clinical-job-hub/.github/workflows/collect-jobs.yml).
+- Local/manual update entry: [update_jobs.sh](/Users/jianglan/clinical-job-hub/scripts/update_jobs.sh).
+- Frontend sync entry: “同步最新岗位” button in [jobs.html](/Users/jianglan/clinical-job-hub/jobs.html), powered by [app.js](/Users/jianglan/clinical-job-hub/assets/app.js).
+
+## 6. Next Architecture Step
 Implement province-level coverage control plane:
 - Target matrix for Anhui/Zhejiang/Jiangsu (city + institution type)
 - Source-health checks (success/failure/empty)
