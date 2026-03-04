@@ -14,9 +14,8 @@
         <span>研职图谱</span>
       </a>
       <nav class="site-nav">
-        <a href="./jobs.html">职位信息库</a>
+        <a href="./jobs.html">岗位直达清单</a>
         <a href="./channels.html">高频渠道雷达</a>
-        <a href="./jobs.html#job-form">发布职位</a>
       </nav>
     </header>
 
@@ -25,12 +24,11 @@
         <p class="tag">Graduate Career Hub</p>
         <h1>面向临床检验诊断学、药学、生物学研究生的求职信息网站</h1>
         <p class="hero-copy">
-          参考 APICompare 的简洁信息流结构，聚焦科研院校、医院检验科、药企研发与生物技术岗位，支持快速发布、筛选与跟踪。
+          参考 APICompare 的简洁信息流结构，聚焦科研院校、医院检验科、药企研发与生物技术岗位，仅保留可直达报名页面的岗位链接。
         </p>
         <div class="hero-actions">
-          <a class="btn btn-primary" href="./jobs.html">查看职位</a>
+          <a class="btn btn-primary" href="./jobs.html">查看直达岗位</a>
           <a class="btn btn-tertiary" href="./channels.html">查看刷岗渠道</a>
-          <a class="btn btn-secondary" href="./jobs.html#job-form">发布新职位</a>
         </div>
       </section>
 
@@ -65,16 +63,16 @@
       <section class="timeline-panel">
         <h3>如何使用</h3>
         <ol>
-          <li>进入职位信息库，按方向/城市/关键词筛选。</li>
-          <li>点击“编辑”补充薪资、截止日期、渠道来源、来源链接等字段。</li>
-          <li>定期更新信息，构建你自己的就业情报面板。</li>
+          <li>运行更新脚本后，在岗位页点击“同步最新岗位”。</li>
+          <li>按关键词/方向/学历快速筛选，直接点“报名链接”。</li>
+          <li>无效首页链接会在同步时自动跳过。</li>
         </ol>
       </section>
     </main>
 
     <script>
       (function () {
-        const key = "clinical-job-hub-data-v1";
+        const key = "clinical-job-direct-v1";
         const seed = [
           { discipline: "临床检验诊断学" },
           { discipline: "药学" },

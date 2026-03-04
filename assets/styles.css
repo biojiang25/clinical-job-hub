@@ -58,6 +58,7 @@ body {
 .site-header,
 .home-main,
 .jobs-main,
+.jobs-main-simple,
 .channels-main {
   position: relative;
   z-index: 1;
@@ -261,6 +262,12 @@ body {
   display: grid;
   grid-template-columns: 380px 1fr;
   gap: 16px;
+}
+
+.jobs-main-simple {
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: 18px;
 }
 
 .channels-main {

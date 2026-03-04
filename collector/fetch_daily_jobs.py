@@ -22,7 +22,7 @@ from datetime import datetime
 from email.utils import parsedate_to_datetime
 from pathlib import Path
 from typing import Any, Dict, Iterable, List, Optional, Tuple
-from urllib.parse import urljoin
+from urllib.parse import urljoin, urlparse
 
 import requests
 from lxml import etree
@@ -88,6 +88,66 @@ def parse_rss_datetime(value: str) -> Optional[str]:
         return extract_date(value)
 
 
+def looks_like_direct_job_link(url: str) -> bool:
+    try:
+        parsed = urlparse(url)
+    except Exception:
+        return False
+
+    if parsed.scheme not in {"http", "https"} or not parsed.netloc:
+        return False
+
+    path = (parsed.path or "/").lower().rstrip("/")
+    query = parsed.query.lower()
+    segments = [seg for seg in path.split("/") if seg]
+
+    if not segments:
+        return False
+
+    generic_single = {
+        "index",
+        "home",
+        "search",
+        "jobs",
+        "job",
+        "work",
+        "career",
+        "careers",
+        "list",
+        "channel",
+        "zhaopin",
+    }
+    if len(segments) == 1 and segments[0] in generic_single and not query:
+        return False
+
+    detail_pattern = bool(
+        re.search(r"\d{4,}|\.s?html?$|\.aspx?$|/detail/|/article/|/view/|/notice/|/content/|/recruit/", path)
+        or re.search(r"(?:^|&)(?:id|aid|articleid|noticeid|jobid|recruitid)=", query)
+    )
+    return detail_pattern
+
+
+def verify_reachable_link(
+    session: requests.Session,
+    url: str,
+    timeout: int,
+    retries: int = 1,
+) -> Tuple[bool, str, Optional[int], str]:
+    last_err = ""
+    for _ in range(retries + 1):
+        try:
+            resp = session.get(url, timeout=timeout, allow_redirects=True)
+            status = resp.status_code
+            final_url = resp.url
+            if status < 400:
+                return True, final_url, status, ""
+            last_err = f"status={status}"
+        except Exception as err:  # noqa: BLE001
+            last_err = str(err)
+        time.sleep(0.4)
+    return False, url, None, last_err
+
+
 def fetch_text(session: requests.Session, url: str, timeout: int, retries: int = 2) -> str:
     last_err = None
     for _ in range(retries + 1):
@@ -123,13 +183,17 @@ def parse_rss(source: Dict[str, Any], content: str, max_links: int) -> List[JobC
         if not title or not link:
             continue
 
+        full_link = urljoin(source["url"], link)
+        if not looks_like_direct_job_link(full_link):
+            continue
+
         out.append(
             JobCandidate(
                 source_id=source["id"],
                 source_name=source["name"],
                 source_category=source.get("category", ""),
                 title=title,
-                link=urljoin(source["url"], link),
+                link=full_link,
                 snippet=snippet,
                 publish_date=publish_date,
             )
@@ -151,6 +215,8 @@ def parse_html(source: Dict[str, Any], content: str, max_links: int) -> List[Job
 
         full_link = urljoin(source["url"], href)
         if must_contain and not any(token in full_link for token in must_contain):
+            continue
+        if not looks_like_direct_job_link(full_link):
             continue
 
         title = normalize_text("".join(a.xpath(".//text()")))
@@ -406,6 +472,8 @@ def collect(args: argparse.Namespace) -> int:
     updated = 0
     scanned = 0
     accepted = 0
+    rejected_non_direct = 0
+    rejected_unreachable = 0
     errors: List[Dict[str, str]] = []
 
     for source in sources:
@@ -425,6 +493,18 @@ def collect(args: argparse.Namespace) -> int:
                 score, details = score_candidate(candidate, source, keyword_cfg)
                 if score <= 0:
                     continue
+
+                if not looks_like_direct_job_link(candidate.link):
+                    rejected_non_direct += 1
+                    continue
+
+                if not args.disable_link_verify:
+                    ok, final_link, _, reason = verify_reachable_link(session, candidate.link, timeout=args.timeout)
+                    if not ok:
+                        rejected_unreachable += 1
+                        continue
+                    if final_link and looks_like_direct_job_link(final_link):
+                        candidate.link = final_link
 
                 accepted += 1
                 ts = now_iso()
@@ -466,6 +546,8 @@ def collect(args: argparse.Namespace) -> int:
         "sources": len(sources),
         "scanned": scanned,
         "accepted": accepted,
+        "rejected_non_direct": rejected_non_direct,
+        "rejected_unreachable": rejected_unreachable,
         "inserted": inserted,
         "updated": updated,
         "errors": errors,
@@ -493,6 +575,7 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--latest-limit", type=int, default=500)
     parser.add_argument("--sleep-ms", type=int, default=300)
     parser.add_argument("--use-env-proxy", action="store_true")
+    parser.add_argument("--disable-link-verify", action="store_true")
     parser.add_argument("--dry-run", action="store_true")
     return parser
 
