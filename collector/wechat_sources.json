@@ -1,29 +1,57 @@
 [
   {
-    "id": "wechat_medical_jobs_feed_1",
-    "name": "医药招聘公众号线索源 A（示例）",
+    "id": "wechat_yxjyzp",
+    "name": "医学检验招聘",
     "category": "微信公众号",
-    "enabled": false,
-    "url": "https://rsshub.app/wechat/mp/REPLACE_WITH_REAL_ACCOUNT_ID",
+    "enabled": true,
+    "wechat_id": "yxjyzp",
+    "url": "https://rsshub.app/wechat/uread/yxjyzp",
     "parser": "rss",
-    "include_any": ["临床检验", "病理", "药学", "生物", "医院", "本科", "硕士"]
+    "source_ref": "https://openi.cn/weixin-yxjyzp-0/",
+    "include_any": ["临床检验", "检验医学", "医学检验", "病理", "医院", "本科", "硕士", "研究生", "招聘"]
   },
   {
-    "id": "wechat_medical_jobs_feed_2",
-    "name": "医药招聘公众号线索源 B（示例）",
+    "id": "wechat_gdyyzp",
+    "name": "医药招聘",
     "category": "微信公众号",
-    "enabled": false,
-    "url": "https://rsshub.app/wechat/mp/REPLACE_WITH_REAL_ACCOUNT_ID",
+    "enabled": true,
+    "wechat_id": "gdyyzp",
+    "url": "https://rsshub.app/wechat/uread/gdyyzp",
     "parser": "rss",
-    "include_any": ["临床检验", "病理", "药学", "生物", "卫健委", "事业单位", "硕士"]
+    "source_ref": "https://openi.cn/weixin-gdyyzp-0/",
+    "include_any": ["药学", "生物", "临床", "医院", "药企", "研发", "本科", "硕士", "招聘"]
   },
   {
-    "id": "wechat_medical_jobs_feed_3",
-    "name": "卫健委公众号线索源（示例）",
+    "id": "wechat_qq3423498",
+    "name": "医院微招聘",
     "category": "微信公众号",
-    "enabled": false,
-    "url": "https://rsshub.app/wechat/mp/REPLACE_WITH_REAL_ACCOUNT_ID",
+    "enabled": true,
+    "wechat_id": "qq3423498",
+    "url": "https://rsshub.app/wechat/uread/qq3423498",
     "parser": "rss",
-    "include_any": ["医院", "疾控", "血站", "药学", "检验", "本科", "硕士"]
+    "source_ref": "https://openi.cn/weixin-qq3423498-0/",
+    "include_any": ["医院", "卫健委", "事业单位", "疾控", "血站", "检验", "药学", "生物", "本科", "硕士", "招聘"]
+  },
+  {
+    "id": "wechat_yhzhp123",
+    "name": "医护招聘",
+    "category": "微信公众号",
+    "enabled": true,
+    "wechat_id": "yhzhp123",
+    "url": "https://rsshub.app/wechat/uread/yhzhp123",
+    "parser": "rss",
+    "source_ref": "https://openi.cn/weixin-yhzhp123-0/",
+    "include_any": ["医院", "医护", "检验", "药学", "生物", "本科", "硕士", "研究生", "招聘"]
+  },
+  {
+    "id": "wechat_yxrcjob",
+    "name": "医学人才网",
+    "category": "微信公众号",
+    "enabled": true,
+    "wechat_id": "yxrcjob",
+    "url": "https://rsshub.app/wechat/uread/yxrcjob",
+    "parser": "rss",
+    "source_ref": "https://www.gaoxiaojob.com/news/126167.html",
+    "include_any": ["临床检验", "病理", "药学", "生物", "高校", "医院", "本科", "硕士", "招聘"]
   }
 ]
