@@ -1,13 +1,13 @@
 {
-  "started_at": "2026-04-23T00:10:35",
-  "finished_at": "2026-04-23T00:11:19",
+  "started_at": "2026-04-24T00:09:11",
+  "finished_at": "2026-04-24T00:09:46",
   "sources": 10,
-  "scanned": 915,
-  "accepted": 51,
+  "scanned": 916,
+  "accepted": 50,
   "rejected_non_direct": 0,
   "rejected_unreachable": 0,
   "inserted": 50,
-  "updated": 1,
+  "updated": 0,
   "errors": [],
   "dry_run": false
 }
