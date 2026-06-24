@@ -1,8 +1,8 @@
 {
-  "started_at": "2026-06-23T01:31:09",
-  "finished_at": "2026-06-23T01:32:13",
+  "started_at": "2026-06-24T01:25:47",
+  "finished_at": "2026-06-24T01:26:43",
   "sources": 10,
-  "scanned": 673,
+  "scanned": 676,
   "accepted": 1,
   "rejected_non_direct": 0,
   "rejected_unreachable": 0,
@@ -12,7 +12,7 @@
     {
       "source": "gaoxiao_job",
       "url": "https://www.gaoxiaojob.com/",
-      "error": "fetch failed: https://www.gaoxiaojob.com/, error=HTTPSConnectionPool(host='www.gaoxiaojob.com', port=443): Max retries exceeded with url: / (Caused by ConnectTimeoutError(<HTTPSConnection(host='www.gaoxiaojob.com', port=443) at 0x7f21e71c2ad0>, 'Connection to www.gaoxiaojob.com timed out. (connect timeout=15)'))"
+      "error": "fetch failed: https://www.gaoxiaojob.com/, error=HTTPSConnectionPool(host='www.gaoxiaojob.com', port=443): Max retries exceeded with url: / (Caused by ConnectTimeoutError(<HTTPSConnection(host='www.gaoxiaojob.com', port=443) at 0x7f4079bc2990>, 'Connection to www.gaoxiaojob.com timed out. (connect timeout=15)'))"
     }
   ],
   "dry_run": false
