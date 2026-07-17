@@ -1,12 +1,12 @@
 {
-  "started_at": "2026-07-16T00:56:19",
-  "finished_at": "2026-07-16T00:57:04",
+  "started_at": "2026-07-17T01:02:39",
+  "finished_at": "2026-07-17T01:03:22",
   "sources": 10,
   "scanned": 913,
-  "accepted": 66,
+  "accepted": 51,
   "rejected_non_direct": 0,
   "rejected_unreachable": 0,
-  "inserted": 66,
+  "inserted": 51,
   "updated": 0,
   "errors": [],
   "dry_run": false
