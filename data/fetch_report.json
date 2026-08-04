@@ -1,13 +1,19 @@
 {
-  "started_at": "2026-08-03T01:06:52",
-  "finished_at": "2026-08-03T01:07:28",
+  "started_at": "2026-08-04T01:00:00",
+  "finished_at": "2026-08-04T01:01:12",
   "sources": 10,
-  "scanned": 913,
-  "accepted": 50,
+  "scanned": 672,
+  "accepted": 1,
   "rejected_non_direct": 0,
   "rejected_unreachable": 0,
-  "inserted": 50,
+  "inserted": 1,
   "updated": 0,
-  "errors": [],
+  "errors": [
+    {
+      "source": "gaoxiao_job",
+      "url": "https://www.gaoxiaojob.com/",
+      "error": "fetch failed: https://www.gaoxiaojob.com/, error=HTTPSConnectionPool(host='www.gaoxiaojob.com', port=443): Read timed out. (read timeout=15)"
+    }
+  ],
   "dry_run": false
 }
