@@ -1,24 +1,13 @@
 {
-  "started_at": "2026-10-01T02:18:11",
-  "finished_at": "2026-10-01T02:24:52",
+  "started_at": "2026-10-02T02:28:59",
+  "finished_at": "2026-10-02T02:29:40",
   "sources": 10,
-  "scanned": 558,
+  "scanned": 912,
   "accepted": 49,
   "rejected_non_direct": 0,
   "rejected_unreachable": 0,
   "inserted": 49,
   "updated": 0,
-  "errors": [
-    {
-      "source": "china_cdc",
-      "url": "https://www.chinacdc.cn/",
-      "error": "fetch failed: https://www.chinacdc.cn/, error=405 Client Error: Not Allowed for url: https://www.chinacdc.cn/"
-    },
-    {
-      "source": "medical_exam_portal",
-      "url": "https://www.med66.com/weishengdanweizhaopin/",
-      "error": "fetch failed: https://www.med66.com/weishengdanweizhaopin/, error=HTTPSConnectionPool(host='www.med66.com', port=443): Max retries exceeded with url: /weishengdanweizhaopin/ (Caused by ConnectTimeoutError(<HTTPSConnection(host='www.med66.com', port=443) at 0x7f3b4595fb50>, 'Connection to www.med66.com timed out. (connect timeout=15)'))"
-    }
-  ],
+  "errors": [],
   "dry_run": false
 }
