@@ -1,8 +1,8 @@
 {
-  "started_at": "2026-10-13T03:45:07",
-  "finished_at": "2026-10-13T03:45:56",
+  "started_at": "2026-10-14T02:05:02",
+  "finished_at": "2026-10-14T02:07:37",
   "sources": 10,
-  "scanned": 908,
+  "scanned": 909,
   "accepted": 75,
   "rejected_non_direct": 0,
   "rejected_unreachable": 0,
