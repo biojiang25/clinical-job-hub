@@ -1,19 +1,13 @@
 {
-  "started_at": "2026-11-06T03:34:25",
-  "finished_at": "2026-11-06T03:34:57",
+  "started_at": "2026-11-07T03:03:06",
+  "finished_at": "2026-11-07T03:04:31",
   "sources": 10,
-  "scanned": 911,
+  "scanned": 706,
   "accepted": 49,
   "rejected_non_direct": 0,
   "rejected_unreachable": 0,
   "inserted": 49,
   "updated": 0,
-  "errors": [
-    {
-      "source": "dxy_jobmd",
-      "url": "https://www.jobmd.cn/work/",
-      "error": "Document is empty"
-    }
-  ],
+  "errors": [],
   "dry_run": false
 }
