@@ -1,6 +1,6 @@
 {
-  "started_at": "2026-11-12T04:01:37",
-  "finished_at": "2026-11-12T04:04:15",
+  "started_at": "2026-11-13T03:31:13",
+  "finished_at": "2026-11-13T03:34:50",
   "sources": 10,
   "scanned": 915,
   "accepted": 49,
@@ -13,6 +13,11 @@
       "source": "dxy_jobmd",
       "url": "https://www.jobmd.cn/work/",
       "error": "Document is empty"
+    },
+    {
+      "source": "healthr",
+      "url": "https://www.healthr.com/",
+      "error": "fetch failed: https://www.healthr.com/, error=HTTPSConnectionPool(host='www.healthr.com', port=443): Read timed out. (read timeout=15)"
     }
   ],
   "dry_run": false
